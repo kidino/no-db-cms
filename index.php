@@ -8,7 +8,7 @@
 		$page = 'pages/404.php';
 	}
 
-	include('config/menu.php');
+	include('config/pages.php');
 
 ?><!doctype html>
 <html lang="en">
@@ -58,7 +58,7 @@
 	<div class="row">
 		<div class="col-md-3 col-lg-2" id="sidebar">
 			<ul class="nav flex-column nav-pills">
-		  <?php foreach($menu as $m) {
+		  <?php foreach($pages as $m) {
 				$active = '';
 				if ($m['page_slug'] == $page_slug) {
 					$active = ' active';
