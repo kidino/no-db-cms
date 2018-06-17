@@ -25,11 +25,18 @@
 	- Emmet plugin -- membantu menulis kod dengan pantas
 	- Markdown plugin -- untuk menulis dokumentasi dan pelajaran ini
 
+## Pemasangan
 
+* letak sahaja di mana-mana webroot
+* /admin untuk ke Admin
+* password admin adalah *admin*
 
+## Struktur Data
 
-
-
-
-
+* kandungan halaman (pages) disimpan di /pages/{page_slug}.php
+* kandungan disimpan dalam format HTML, dengan syntax HEREDOC
+* senarai kandungan disimpan di /config/pages.php
+* ianya disimpan sebagai Array PHP
+* password admin disimpan di /admin/util/passwd.php
+* ianya disimpan dalam format PHP Password Hash
 
