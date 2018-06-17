@@ -1,30 +1,23 @@
-# No DB CMS
+# Struktur CMS
 
-## Objektif
+1. Layout
+2. Frontend
+3. Backend
 
-* Membina sebuah content management system tanpa database dan tanpa framework
-* Menunjukajar konsep-konsep asas dalam pengaturcaraan dan PHP
+## Layout
 
-## Proses
+Kita gunakan Bootstrap 4 untuk layout asas. Antara yang diperlukan adalah
 
-* Saya tidak merancang pelajaran dengan teliti
-* Saya akan coding dan merakam terus pelajaran
-* Saya akan melakukan kesilapan
-* CMS akan dibangunkan secara berperingkat
+* Bootstrap 4.1.1
+* JQuery 3.3.1
 
-## Kod Sumber dan Rujukan
+## Frontend
 
-* Github - https://github.com/kidino/no-db-cms
-* Perhatikan Release untuk peringkat-peringkat kod sumber dikemaskini
+Sistem yang akan menggunakan layout, mencapat dan memaparkan kandungan kepada umum
 
-## Alatan Saya
+## Backend
 
-* Windows 10
-* XAMPP untuk Apache & PHP7
-* Adobe Brackets untuk code editor
-	- Emmet plugin
-	- Markdown plugin
-
+Untuk admin dan pengurusan data dan kandungan
 
 
 

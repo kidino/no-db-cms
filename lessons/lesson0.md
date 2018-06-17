@@ -22,13 +22,8 @@
 * Windows 10
 * XAMPP untuk Apache & PHP7
 * Adobe Brackets untuk code editor
-	- Emmet plugin -- membantu menulis kod dengan pantas
-	- Markdown plugin -- untuk menulis dokumentasi dan pelajaran ini
-
-
-
-
-
+	- Emmet plugin
+	- Markdown plugin
 
 
 
