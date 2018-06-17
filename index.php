@@ -8,20 +8,7 @@
 		$page = 'pages/404.php';
 	}
 
-	$menu = array(
-		array(
-			'label' => 'Home',
-			'page_slug' => 'home'
-		),
-		array(
-			'label' => 'About',
-			'page_slug' => 'about'
-		),
-		array(
-			'label' => 'Contact',
-			'page_slug' => 'contact'
-		)
-	);
+	include('config/menu.php');
 
 ?><!doctype html>
 <html lang="en">
@@ -83,7 +70,12 @@
 		  <?php } ?>
 			</ul>
 		</div>
-		<div class="col-md-9 col-lg-10"><?php include($page);?></div>
+		<div class="col-md-9 col-lg-10">
+		<?php 
+			include($page); 
+			echo $content; 
+		?>
+		</div>
 	</div>
 	
 </div>
