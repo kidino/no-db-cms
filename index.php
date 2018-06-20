@@ -1,6 +1,15 @@
 <?php
+
+  include('inc/functions.php');
 	$page_slug = (isset($_GET['page'])) ? trim($_GET['page']) : 'home';
 	if ($page_slug == '') { $page = 'home'; }
+
+  // prevent LFI -- allows only alphnum, dash and underscore
+  // does not allow slashes and dots to prevent include to other
+  // than allowed location
+  if (!validate_slug($page_slug)) {
+    $page_slug = "404.php";
+  }
 
 	$page = "pages/$page_slug.php";
 
