@@ -8,7 +8,7 @@
   // does not allow slashes and dots to prevent include to other
   // than allowed location
   if (!validate_slug($page_slug)) {
-    $page_slug = "404.php";
+    $page_slug = "404";
   }
 
 	$page = "pages/$page_slug.php";
