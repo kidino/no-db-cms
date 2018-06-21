@@ -28,7 +28,11 @@
  			<td width="200" align="right">
  				<a target="_blank" href="../index.php?page=<?php echo $p['page_slug']?>" class="btn btn-sm btn-info">View</a>
  				<a href="page_edit.php?page=<?php echo $p['page_slug']?>" class="btn btn-sm btn-primary">Edit</a>
- 				<a href="javascript:go_delete('<?php echo $p['page_slug']?>')" class="btn btn-sm btn-danger">Delete</a>
+ 				<?php 
+					$delete_url = "javascript:go_delete('$p[page_slug]')"; 
+				
+				?>
+ 				<a href="<?php echo ($p['page_slug'] != 'home') ? $delete_url : '#'; ?>" class="btn btn-sm <?php echo ($p['page_slug'] != 'home') ? ' btn-danger' : ' btn-light'; ?>" >Delete</a>
  			</td>
  		</tr>
  	<?php } ?>

@@ -38,6 +38,12 @@
 			// duplicate does not exists -- can update slug
 			foreach($pages as $k => $p) {
 				if ($p['page_slug'] == $page_slug) {
+					
+					// cannot update slug home
+					if ($page_slug == 'home') {
+						$page_slug_update = 'home';
+					}
+					
 					$pages[$k]['page_slug'] = $page_slug_update;
 					$pages[$k]['label'] = $label;
 					
@@ -102,7 +108,7 @@
   <div class="form-group">
     <label for="exampleInputPassword1">Page Slug</label>
     <input type="hidden" name="page_slug" class="form-control" id="page_slug" placeholder="Page slug" value="<?php echo $this_page['page_slug'];?>">
-    <input type="text" name="page_slug_update" class="form-control" id="page_slug_update" placeholder="Page slug" value="<?php echo $this_page['page_slug'];?>">
+    <input type="text" name="page_slug_update" class="form-control" id="page_slug_update" placeholder="Page slug" value="<?php echo $this_page['page_slug'];?>" <?php echo ($this_page['page_slug'] == 'home') ? ' readonly disabled' : ''; ?>>
   </div>
 
         	</div>

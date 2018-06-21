@@ -1,6 +1,6 @@
 <?php 
-
-if (isset($_GET['page'])) {
+// cannot delete home slug
+if (isset($_GET['page']) && (strtolower(trim($_GET['page'])) != 'home') ) {
 	include('../inc/functions.php');
 	check_pages('../config/pages.php');
 	include('../config/pages.php');
