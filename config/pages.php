@@ -14,4 +14,9 @@
     'label' => 'Contact',
     'page_slug' => 'contact',
   ),
+  3 => 
+  array (
+    'label' => 'New Page',
+    'page_slug' => 'new-page',
+  ),
 );?>

@@ -1,5 +1,4 @@
 <?php include('utils/login_check.php'); ?>
-<?php include('../inc/functions.php'); ?>
 <?php include('utils/header.php'); ?>
 <link rel="stylesheet" href="smn/summernote-bs4.css">
 <script src="smn/summernote-bs4.js"></script>
@@ -23,7 +22,7 @@
 		$page_slug = $_POST['page_slug'];
 		$content = $_POST['content'];
 		$label = $_POST['label'];
-		if ($_POST['page_slug'] != $_POST['page_slug_update']) {
+		if ($page_slug != $page_slug_update) {
 			// to update page slug -- find if duplicate exists
 			foreach($pages as $p) {
 				if ($p['page_slug'] == $page_slug_update) {
@@ -56,7 +55,7 @@
     
     $error = array();
     if ($duplicate) { $error[] = 'Slug already exists. Please pick another.'; }
-    if (!validate_slug($page_slug_update)) { $error[] = 'Slug is invalid. Minimum of four characters, uses only alphanumerics, dashes or underscores.'; }
+    if (!validate_slug($page_slug_update)) { $error[] = 'Slug is invalid. Minimum of four characters, use only alphanumerics, dashes or underscores.'; }
 
 	}
 

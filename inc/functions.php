@@ -11,7 +11,7 @@ function validate_slug($str) {
   if ( 
       ctype_alnum( str_replace($allowed, '', $str ) ) // must match alphanum, dash & underscore only
       && (!in_array($str, $prevented_slug)) // not in prevented words
-      && (strlen($str) > 4) // must be over 4 characters
+      && (strlen($str) >= 4) // must be over 4 characters
   ) {
     return true;
   } 

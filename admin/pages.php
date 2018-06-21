@@ -5,7 +5,7 @@
 <?php include('../config/pages.php'); ?>
     <main role="main" class="container">
 
-        <h1>Pages</h1>
+        <h1>Pages <a href="page_add.php" class="btn btn-primary float-right">New Page</a></h1>
  <?php if (count($pages) > 0) { ?>
  <div class="responsive-table">
  <table class="table table-striped">
@@ -21,7 +21,11 @@
  		<tr>
  			<td><?php echo $p['page_slug'];?></td>
  			<td><?php echo $p['label'];?></td>
- 			<td><a href="page_edit.php?page=<?php echo $p['page_slug']?>" class="btn btn-sm btn-primary">Edit</a></td>
+ 			<td width="200" align="right">
+ 				<a target="_blank" href="../index.php?page=<?php echo $p['page_slug']?>" class="btn btn-sm btn-info">View</a>
+ 				<a href="page_edit.php?page=<?php echo $p['page_slug']?>" class="btn btn-sm btn-primary">Edit</a>
+ 				<a href="page_delete.php?page=<?php echo $p['page_slug']?>" class="btn btn-sm btn-danger">Delete</a>
+ 			</td>
  		</tr>
  	<?php } ?>
  	</tbody>
