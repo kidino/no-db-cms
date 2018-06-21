@@ -6,7 +6,7 @@ function validate_slug($str) {
   // each array entry is an special char allowed
   // besides the ones from ctype_alnum
   $allowed = array("-", "_");
-  $prevented_slug = array('404','index','home');
+  $prevented_slug = array('404','index');
 
   if ( 
       ctype_alnum( str_replace($allowed, '', $str ) ) // must match alphanum, dash & underscore only
