@@ -34,7 +34,10 @@
 			
 		}
 		
-		if (!$duplicate && validate_slug($page_slug_update)) {
+		if (
+			(!$duplicate && validate_slug($page_slug_update))
+			|| ($page_slug == 'home')
+		   ) {
 			// duplicate does not exists -- can update slug
 			foreach($pages as $k => $p) {
 				if ($p['page_slug'] == $page_slug) {
