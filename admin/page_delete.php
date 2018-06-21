@@ -15,8 +15,7 @@ if (isset($_GET['page']) && (strtolower(trim($_GET['page'])) != 'home') ) {
 	
 	file_put_contents('../config/pages.php', '<?php $pages = '.var_export($new_pages, true).';?>');
 	unlink("../pages/$page_slug.php");
-	echo "Deleted";
 }
 
-//header('Location: pages.php');
+header('Location: pages.php');
 ?>
