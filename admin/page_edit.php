@@ -13,6 +13,7 @@
 	}
 
 	include('../config/pages.php');
+	include('../inc/functions.php');
 
 	if (isset($_POST['page_slug'])) {
 		
@@ -32,7 +33,7 @@
 			
 		}
 		
-		if (!$duplicate) {
+		if (!$duplicate && validate_slug($page_slug_update)) {
 			// duplicate does not exists -- can update slug
 			foreach($pages as $k => $p) {
 				if ($p['page_slug'] == $page_slug) {
@@ -51,6 +52,10 @@
 			header('Location: page_edit.php?page='.$page_slug_update.'&success=1');
 			
 		}
+    
+    $error = array();
+    if ($duplicate) { $error[] = 'Slug already exists. Please pick another.'; }
+    if (!validate_slug($page_slug_update)) { $error[] = 'Slug is invalid. Minimum of four characters, uses only alphanumerics, dashes or underscores.'; }
 
 	}
 
@@ -74,6 +79,12 @@
         <?php if (isset($_GET['success']) && ($_GET['success'] == '1')) { ?>
         <p class="alert alert-success">Update successful</p>
         <?php } ?>
+        
+        <?php if (isset($error)) {
+         foreach($error as $e) {
+         ?>
+        <p class="alert alert-danger"><?php echo $e;?></p>
+        <?php } } ?>
         
         <div class="row">
         	<div class="col-sm-6">
