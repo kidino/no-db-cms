@@ -17,3 +17,9 @@ function validate_slug($str) {
   } 
     return false;
 }
+
+function check_pages($loc) {
+	if (!file_exists($loc)) {
+		file_put_contents($loc, '<?php $pages = array();?>');
+	}
+}

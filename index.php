@@ -1,12 +1,14 @@
 <?php
 
-  include('inc/functions.php');
-	$page_slug = (isset($_GET['page'])) ? trim($_GET['page']) : 'home';
+	$page_slug = (isset($_GET['page'])) ? strtolower( trim($_GET['page']) ) : 'home';
 	if ($page_slug == '') { $page = 'home'; }
 
   // prevent LFI -- allows only alphnum, dash and underscore
   // does not allow slashes and dots to prevent include to other
   // than allowed location
+	include('inc/functions.php');
+	check_pages('config/pages.php');
+	include('config/pages.php');
   if (!validate_slug($page_slug)) {
     $page_slug = "404";
   }
@@ -17,7 +19,6 @@
 		$page = 'pages/404.php';
 	}
 
-	include('config/pages.php');
 
 ?>
 	<!doctype html>

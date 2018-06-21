@@ -4,7 +4,7 @@
 <script src="smn/summernote-bs4.js"></script>
 <?php
 
-	$page_slug = (isset($_GET['page'])) ? trim($_GET['page']) : '';
+	$page_slug = (isset($_GET['page'])) ? strtolower( trim($_GET['page']) ) : '';
 
 	$page = "../pages/$page_slug.php";
 	$error = false;
@@ -19,67 +19,46 @@
 	if (isset($_POST['page_slug'])) {
 		
 		$duplicate = false;
-		$page_slug_update = strtolower( trim($_POST['page_slug_update']));
 		$page_slug = strtolower( trim($_POST['page_slug']) );
 		$content = $_POST['content'];
 		$label = $_POST['label'];
-		if ($page_slug != $page_slug_update) {
-			// to update page slug -- find if duplicate exists
-			foreach($pages as $p) {
-				if ($p['page_slug'] == $page_slug_update) {
-					$duplicate = true;
-					break;
-				}
+		foreach($pages as $p) {
+			if ($p['page_slug'] == $page_slug) {
+				$duplicate = true;
+				break;
 			}
-			
 		}
+
 		
-		if (!$duplicate && validate_slug($page_slug_update)) {
+		if (!$duplicate && validate_slug($page_slug)) {
 			// duplicate does not exists -- can update slug
-			foreach($pages as $k => $p) {
-				if ($p['page_slug'] == $page_slug) {
-					$pages[$k]['page_slug'] = $page_slug_update;
-					$pages[$k]['label'] = $label;
-					
-					file_put_contents('../config/pages.php', '<?php $pages = '.var_export($pages, true).';?>');
-					
-					break;
-				}
-			}
 			
-			unlink("../pages/$page_slug.php");
-			file_put_contents("../pages/$page_slug_update.php", '<?php $content = <<<EOD'."\r\n$content\r\nEOD;\r\n?>");
+			$pages[] = array(
+				'label' => $label,
+				'page_slug' => $page_slug
+			);
 			
-			header('Location: page_edit.php?page='.$page_slug_update.'&success=1');
+			file_put_contents('../config/pages.php', '<?php $pages = '.var_export($pages, true).';?>');
+			
+			file_put_contents("../pages/$page_slug.php", '<?php $content = <<<EOD'."\r\n$content\r\nEOD;\r\n?>");
+			
+			header('Location: page_edit.php?page='.$page_slug.'&success=1');
 			
 		}
     
     $error = array();
     if ($duplicate) { $error[] = 'Slug already exists. Please pick another.'; }
-    if (!validate_slug($page_slug_update)) { $error[] = 'Slug is invalid. Minimum of four characters, use only alphanumerics, dashes or underscores.'; }
+    if (!validate_slug($page_slug)) { $error[] = 'Slug is invalid. Minimum of four characters, use only alphanumerics, dashes or underscores.'; }
 
 	}
-
-	foreach($pages as $p) {
-		if ($p['page_slug'] == $page_slug) {
-			$this_page = $p;
-			break;
-		}
-	}
-	include($page);
-
 
 ?>
     <main role="main" class="container">
 		<a href="pages.php" class="btn btn-sm btn-primary">&larr; Back to Pages</a>
-       <form action="page_edit.php?page=<?php echo $page_slug?>" id="content_form" method="post">
-        <h1>Edit Page : <?php echo $page_slug; ?> <button type="submit" class="btn btn-primary float-right">Save</button></h1>
+       <form action="page_add.php?page=<?php echo $page_slug?>" id="content_form" method="post">
+        <h1>Add New Page <button type="submit" class="btn btn-primary float-right">Save</button></h1>
         
         <hr>
-        
-        <?php if (isset($_GET['success']) && ($_GET['success'] == '1')) { ?>
-        <p class="alert alert-success">Update successful</p>
-        <?php } ?>
         
         <?php if (isset($error)) {
          foreach($error as $e) {
@@ -92,7 +71,7 @@
         		
   <div class="form-group">
     <label for="exampleInputPassword1">Label</label>
-    <input type="text" name="label" class="form-control" id="label" placeholder="Page label" value="<?php echo $this_page['label'];?>">
+    <input type="text" name="label" class="form-control" id="label" placeholder="Page label">
   </div>
 
         	</div>
@@ -101,8 +80,7 @@
         		
   <div class="form-group">
     <label for="exampleInputPassword1">Page Slug</label>
-    <input type="hidden" name="page_slug" class="form-control" id="page_slug" placeholder="Page slug" value="<?php echo $this_page['page_slug'];?>">
-    <input type="text" name="page_slug_update" class="form-control" id="page_slug_update" placeholder="Page slug" value="<?php echo $this_page['page_slug'];?>">
+    <input type="text" name="page_slug" class="form-control" id="page_slug" placeholder="Page slug" >
   </div>
 
         	</div>
