@@ -4,17 +4,18 @@
 <script src="smn/summernote-bs4.js"></script>
 <?php
 
+	include('../inc/functions.php');
+	check_pages('../config/pages.php');
+	include('../config/pages.php');
+
 	$page_slug = (isset($_GET['page'])) ? trim($_GET['page']) : '';
 
 	$page = "../pages/$page_slug.php";
 	$error = false;
-	if (!file_exists($page) || ($page_slug == '')) {
-		$error = true;
+	if (!file_exists($page) || ($page_slug == '') || (!validate_slug($page_slug))) {
+		header('Location: pages.php');
 	}
 
-	include('../inc/functions.php');
-	check_pages('../config/pages.php');
-	include('../config/pages.php');
 
 	if (isset($_POST['page_slug'])) {
 		
