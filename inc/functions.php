@@ -20,6 +20,7 @@ function validate_slug($str) {
 
 function check_pages($loc) {
 	if (!file_exists($loc)) {
-		file_put_contents($loc, '<?php $pages = array();?>');
+		$default_pages = array('label' => 'Home', 'page_slug' => 'home');
+		file_put_contents($loc, '<?php $pages = '.var_export($default_pages, true).';?>');		
 	}
 }
