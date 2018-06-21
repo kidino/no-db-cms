@@ -1,4 +1,5 @@
 <?php include('utils/login_check.php'); ?>
+<?php include('../inc/functions.php'); ?>
 <?php include('utils/header.php'); ?>
 <link rel="stylesheet" href="smn/summernote-bs4.css">
 <script src="smn/summernote-bs4.js"></script>
