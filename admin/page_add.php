@@ -17,7 +17,7 @@
 	include('../config/pages.php');
 
 	if (isset($_POST['page_slug'])) {
-		
+
 		$duplicate = false;
 		$page_slug = strtolower( trim($_POST['page_slug']) );
 		$content = $_POST['content'];
@@ -29,23 +29,23 @@
 			}
 		}
 
-		
+
 		if (!$duplicate && validate_slug($page_slug)) {
 			// duplicate does not exists -- can update slug
-			
+
 			$pages[] = array(
 				'label' => $label,
 				'page_slug' => $page_slug
 			);
-			
+
 			file_put_contents('../config/pages.php', '<?php $pages = '.var_export($pages, true).';?>');
-			
+
 			file_put_contents("../pages/$page_slug.php", '<?php $content = <<<EOD'."\r\n$content\r\nEOD;\r\n?>");
-			
+
 			header('Location: page_edit.php?page='.$page_slug.'&success=1');
-			
+
 		}
-    
+
     $error = array();
     if ($duplicate) { $error[] = 'Slug already exists. Please pick another.'; }
     if (!validate_slug($page_slug)) { $error[] = 'Slug is invalid. Minimum of four characters, use only alphanumerics, dashes or underscores.'; }
@@ -57,27 +57,27 @@
 		<a href="pages.php" class="btn btn-sm btn-primary">&larr; Back to Pages</a>
        <form action="page_add.php?page=<?php echo $page_slug?>" id="content_form" method="post">
         <h1>Add New Page <button type="submit" class="btn btn-primary float-right">Save</button></h1>
-        
+
         <hr>
-        
-        <?php if (isset($error)) {
+
+        <?php if ($error && is_array($error)) {
          foreach($error as $e) {
          ?>
         <p class="alert alert-danger"><?php echo $e;?></p>
         <?php } } ?>
-        
+
         <div class="row">
         	<div class="col-sm-6">
-        		
+
   <div class="form-group">
     <label for="exampleInputPassword1">Label</label>
     <input type="text" name="label" class="form-control" id="label" placeholder="Page label">
   </div>
 
         	</div>
-        	
+
         	<div class="col-sm-6">
-        		
+
   <div class="form-group">
     <label for="exampleInputPassword1">Page Slug</label>
     <input type="text" name="page_slug" class="form-control" id="page_slug" placeholder="Page slug" >
@@ -86,29 +86,29 @@
         	</div>
 
         </div>
-        
-               
+
+
         <input type="hidden" name="content" id="content" value="">
     <div id="summernote"></div>
     <p>&nbsp;</p>
-    
+
     </form>
     <script>
       $('#summernote').summernote({
         tabsize: 2,
         height: 400
       });
-		
+
 var markupStr = '<?php echo trim(preg_replace('/\s\s+/', ' ', addslashes($content)));?>';
-$('#summernote').summernote('code', markupStr);		
-		
+$('#summernote').summernote('code', markupStr);
+
 		$(document).ready(function(){
 			$('#content_form').on('submit', function(){
 				$('#content').val( $('#summernote').summernote('code') );
 				return true;
 			})
 		});
-    </script>        
-        
+    </script>
+
     </main><!-- /.container -->
 <?php include('utils/footer.php'); ?>
