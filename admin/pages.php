@@ -36,7 +36,7 @@
  </table>
  </div>
 <?php } else { ?>
-<table class="table-striped">
+<table class="table-striped table">
  	<thead>
  		<tr>
  			<th>Slug</th>
