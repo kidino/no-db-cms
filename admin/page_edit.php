@@ -11,7 +11,6 @@
 	$page_slug = (isset($_GET['page'])) ? trim($_GET['page']) : '';
 
 	$page = "../pages/$page_slug.php";
-	$error = false;
 	if (!file_exists($page) || ($page_slug == '') || (!validate_slug($page_slug))) {
 		header('Location: pages.php');
 	}
@@ -78,7 +77,6 @@
 	}
 	include($page);
 
-
 ?>
     <main role="main" class="container">
 		<a href="pages.php" class="btn btn-sm btn-primary">&larr; Back to Pages</a>
@@ -130,8 +128,12 @@
         tabsize: 2,
         height: 400
       });
-		
+
+// Jadi $content sebagai Javascript string markupStr
+// -- buang newline, jadikan string 1 baris
+// -- kena addslashes sebab kena escape ' dan " untuk jadikan string
 var markupStr = '<?php echo trim(preg_replace('/\s\s+/', ' ', addslashes($content)));?>';
+		
 $('#summernote').summernote('code', markupStr);		
 		
 		$(document).ready(function(){

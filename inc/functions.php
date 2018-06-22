@@ -1,6 +1,7 @@
 <?php
 
-$str = "";
+// kita guna ni nak pastikan input dari $_GET bersih daripada
+// cubaan injection dan include file yang tidak dikehendaki
 function validate_slug($str) {
 
   // each array entry is an special char allowed
@@ -18,6 +19,8 @@ function validate_slug($str) {
     return false;
 }
 
+// sebelum kita include config/pages.php, kita check dulu dia
+// ada ke tak. kalau takde, kita create baru.
 function check_pages($loc) {
 	if (!file_exists($loc)) {
 		$default_pages = array(array('label' => 'Home', 'page_slug' => 'home'));

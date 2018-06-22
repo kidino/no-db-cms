@@ -5,16 +5,12 @@ $error = false;
 if (isset($_POST['loginpass'])) {	
 	include('utils/passwd.php');
 	$loginpass = $_POST['loginpass'];
-	if (password_verify($loginpass, $passwd)) {
-		
-		$new_password = $_POST['new_password'];
-		$repeat_password = $_POST['repeat_password'];
-		
-		if ($repeat_password == $new_password) {
-			$hash = password_hash($new_password, PASSWORD_DEFAULT);
-			file_put_contents('utils/passwd.php', '<?php $passwd = \''.$hash.'\'; ?>');
-			header('Location: logout.php');
-		}
+	$new_password = $_POST['new_password'];
+	$repeat_password = $_POST['repeat_password'];
+	if (password_verify($loginpass, $passwd) && ($repeat_password == $new_password)) {
+		$hash = password_hash($new_password, PASSWORD_DEFAULT);
+		file_put_contents('utils/passwd.php', '<?php $passwd = \''.$hash.'\'; ?>');
+		header('Location: logout.php');
 	}
 	$error = true;
 }

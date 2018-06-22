@@ -3,12 +3,13 @@
 	$page_slug = (isset($_GET['page'])) ? strtolower( trim($_GET['page']) ) : 'home';
 	if ($page_slug == '') { $page = 'home'; }
 
-  // prevent LFI -- allows only alphnum, dash and underscore
-  // does not allow slashes and dots to prevent include to other
-  // than allowed location
 	include('inc/functions.php');
 	check_pages('config/pages.php');
 	include('config/pages.php');
+
+  // prevent LFI -- allows only alphnum, dash and underscore
+  // does not allow slashes and dots to prevent include to other
+  // than allowed location
   if (!validate_slug($page_slug)) {
     $page_slug = "404";
   }
@@ -50,6 +51,7 @@
 			footer {
 				background-color: #333;
 				color: #fff;
+				min-height: 100px;
 			}
 			
 			#sidebar {
@@ -70,7 +72,9 @@
 				<div class="row">
 					<div class="col-md-3 col-lg-2" id="sidebar">
 						<ul class="nav flex-column nav-pills">
-							<?php foreach($pages as $m) {
+							<?php 
+				// generating sidebar menu
+				foreach($pages as $m) {
 				$active = '';
 				if ($m['page_slug'] == $page_slug) {
 					$active = ' active';
@@ -85,7 +89,8 @@
 						</ul>
 					</div>
 					<div class="col-md-9 col-lg-10">
-						<?php 
+		<?php 
+			// outputing content
 			include($page); 
 			echo $content; 
 		?>
