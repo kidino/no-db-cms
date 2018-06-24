@@ -1,3 +1,4 @@
 /pages
 /config/pages.php
 /config/menu.php
+/admin/utils/passwd.php

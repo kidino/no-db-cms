@@ -1,1 +1,0 @@
-<?php $passwd = '$2y$10$Ov4/kiuZeizOaEKtYTbmqOx2QshPW6Mv660ffYMiiPRE6IFW.0yVu'; ?>

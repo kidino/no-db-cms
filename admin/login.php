@@ -7,6 +7,12 @@ if (isset($_SESSION['loggedin']) && ($_SESSION['loggedin'] === true)) {
 
 $error = false;
 if (isset($_POST['loginpass'])) {
+	
+	// default passwd.php -- admin
+	if (!file_exists('utils/passwd.php')) {
+		file_put_contents('utils/passwd.php', '<?php $passwd = \'$2y$10$5Q5nyP1oc6qqaSFY71rqo.fA3CrwRRv8mAOZEZZhdvObYF6.vQkgO\'; ?>');
+	}
+	
 	include('utils/passwd.php');
 	$loginpass = $_POST['loginpass'];
 	if (password_verify($loginpass, $passwd)) {
